@@ -1,0 +1,168 @@
+/* =====================================================================
+   THAW Strategy Consulting · journey.css  (home page v2)
+   The scrollytelling opening: a sticky stage, a canvas scrubbed by
+   scroll through real footage (the Rockies, frozen Edmonton, the river
+   breaking up, the city in summer, Whyte Avenue), five chapters of type,
+   a route rail and a HUD. Static route (?static=1, reduced motion, no JS,
+   print) stacks the chapters as full-height posters.
+   ===================================================================== */
+
+.journey{
+  position:relative;
+  height:calc(var(--jl,1000) * 1vh);
+  height:calc(var(--jl,1000) * 1svh);
+  background:var(--pine-deep);color:var(--frost);
+  z-index:1;
+}
+.journey__stage{
+  position:sticky;top:0;
+  height:100vh;height:100svh;
+  overflow:hidden;isolation:isolate;contain:layout paint style;
+  background:var(--pine-deep) center/cover no-repeat;
+}
+.journey__canvas,.journey__frost,.journey #snow{position:absolute;inset:0;width:100%;height:100%;display:block}
+.journey__canvas{z-index:1}
+.journey__grade{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;will-change:opacity}
+.journey__grade--cool{background:linear-gradient(180deg,rgba(26,46,80,.5),rgba(12,40,30,.42))}
+.journey__grade--warm{background:radial-gradient(75% 65% at 72% 82%,rgba(233,113,50,.3),transparent 70%)}
+.journey__vignette{
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(11,34,23,.66),rgba(11,34,23,.28) 46%,rgba(11,34,23,0) 74%),
+    linear-gradient(0deg,rgba(11,34,23,.62),rgba(11,34,23,0) 42%),
+    linear-gradient(180deg,rgba(11,34,23,.5),rgba(11,34,23,0) 24%),
+    linear-gradient(270deg,rgba(11,34,23,.42),rgba(11,34,23,0) 26%);
+}
+.journey #snow{z-index:4;pointer-events:none}
+.journey__frost{z-index:5;opacity:0;pointer-events:none;will-change:opacity}
+
+/* ---------- chapters ---------- */
+.chapter{
+  position:absolute;inset:0;z-index:6;
+  display:grid;align-content:center;
+  padding:calc(var(--nav-h) + 28px) var(--gutter) 110px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  will-change:transform,opacity;
+}
+.chapter--hero{opacity:1;visibility:visible}
+.chapter a,.chapter button{pointer-events:auto}
+.chapter__inner{width:min(100%,var(--max));margin-inline:auto}
+.chapter__poster{display:none}
+.chapter__tag{
+  display:inline-flex;align-items:center;gap:14px;margin:0 0 20px;
+  font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--frost-2);
+}
+.chapter__tag::before{content:"";width:28px;height:1px;background:var(--ember);flex:none}
+.chapter--hero .display--xl{font-size:clamp(3rem,min(8vw,13vh),7.6rem);max-width:11ch}
+.chapter .display{max-width:15ch;text-wrap:balance}
+.chapter .display em,.journey .display em{color:var(--ember-soft)}
+.journey .eyebrow{color:var(--frost-2)}
+.journey .lede{font-weight:300;color:rgba(238,243,246,.82);max-width:34em;margin:0 0 38px}
+.chapter__p{max-width:30em;margin:0}
+.chapter--end .chapter__p{margin-bottom:36px}
+.chapter__credit{margin:28px 0 0;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,243,246,.5)}
+.journey .btn--ghost:hover{background:rgba(238,243,246,.1)}
+.journey :focus-visible{outline-color:var(--ember-soft)}
+/* words that rise with the scroll (chapters 2 to 5) */
+.jw{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .02em .12em;margin:0 -.02em -.12em}
+.jw>span{display:inline-block;transform:translateY(110%);will-change:transform}
+
+/* ---------- route rail (desktop) ---------- */
+.rail{
+  position:absolute;right:var(--gutter);top:50%;transform:translateY(-50%);z-index:7;
+  display:grid;gap:18px;padding-left:28px;margin:0;
+}
+.rail__line{position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(238,243,246,.18)}
+.rail__line i{position:absolute;left:0;top:0;width:100%;height:100%;background:var(--ember);transform:scaleY(0);transform-origin:top;will-change:transform}
+.rail__stop{
+  position:relative;display:block;text-align:left;background:none;border:0;padding:0;cursor:pointer;text-shadow:0 1px 14px rgba(11,34,23,.95),0 0 3px rgba(11,34,23,.9);
+  font-family:var(--font-body);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,243,246,.45);
+  transition:color .4s var(--ease);
+}
+.rail__stop::before{content:"";position:absolute;left:-32px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--pine-deep);border:1px solid rgba(238,243,246,.4);transition:background-color .4s,border-color .4s,transform .4s var(--ease)}
+.rail__stop b{display:block;font-family:var(--font-display);font-weight:400;font-size:1.1rem;letter-spacing:0;text-transform:none;color:rgba(238,243,246,.66);line-height:1.1;margin:4px 0 2px;transition:color .4s}
+.rail__stop span{font-variant-numeric:tabular-nums}
+.rail__stop.is-past{color:rgba(238,243,246,.6)}
+.rail__stop.is-past::before{background:var(--ember);border-color:var(--ember)}
+.rail__stop.is-on{color:var(--ember-soft)}
+.rail__stop.is-on b{color:#fff}
+.rail__stop.is-on::before{background:var(--ember);border-color:var(--ember);transform:scale(1.5)}
+.rail__stop:hover b{color:#fff}
+
+/* ---------- HUD ---------- */
+.hud{
+  text-shadow:0 1px 12px rgba(11,34,23,.9);
+  position:absolute;left:var(--gutter);right:var(--gutter);bottom:30px;z-index:7;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(238,243,246,.62);pointer-events:none;
+}
+.hud__count{display:flex;align-items:baseline;gap:12px}
+.hud__count b{font-family:var(--font-display);font-weight:400;font-size:1.35rem;letter-spacing:0;color:#fff;font-variant-numeric:tabular-nums}
+.hud__count i{font-style:normal;opacity:.6}
+.hud__cue{display:flex;align-items:center;gap:14px;transition:opacity .5s}
+.hud__cue svg{width:12px;height:22px;stroke:var(--ember);fill:none;stroke-width:1.4;animation:cue 2.2s var(--ease) infinite}
+.hud.is-on .hud__cue{opacity:0}
+.hud__skip{
+  position:absolute;right:var(--gutter);bottom:30px;z-index:8;
+  font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:rgba(238,243,246,.62);
+  padding:8px 0 4px;border-bottom:1px solid rgba(238,243,246,.3);opacity:0;visibility:hidden;transition:opacity .5s,color .3s,visibility 0s .5s;
+}
+.hud__skip:hover{color:#fff}
+.journey.is-going .hud__skip{opacity:1;visibility:visible;transition-delay:0s}
+.journey.is-done .hud__skip{opacity:0;visibility:hidden}
+
+/* ---------- nav over the stage: dark glass instead of the pale slab ---------- */
+body[data-temp] .nav.over-dark.is-scrolled{background:rgba(11,34,23,.56);color:var(--frost);box-shadow:0 1px 0 rgba(238,243,246,.08)}
+.nav.over-dark .logo-light{display:block}
+.nav.over-dark .logo-dark{display:none}
+.nav.over-dark .temp.is-above .temp__val{color:var(--ember-soft)}
+
+/* ---------- preloader progress ---------- */
+.preloader__load{position:absolute;left:50%;bottom:min(12vh,96px);transform:translateX(-50%);width:min(64vw,380px);margin:0;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(238,243,246,.6);text-align:center}
+.preloader__load i{display:block;position:relative;height:1px;margin-top:14px;background:rgba(238,243,246,.16)}
+.preloader__load i::after{content:"";position:absolute;inset:0;background:var(--ember);transform:scaleX(var(--load,0));transform-origin:left;transition:transform .3s linear}
+
+/* the section that follows the stage slides up over the last frame */
+.journey+.section{position:relative;z-index:2;box-shadow:0 -40px 80px -40px rgba(11,34,23,.5)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){.rail{display:none}}
+@media (max-width:960px){
+  .chapter{align-content:end;padding:calc(var(--nav-h) + 20px) var(--gutter) 92px}
+  .chapter--hero .display--xl{font-size:clamp(2.7rem,11.5vw,5rem);max-width:none}
+  .chapter .display{max-width:none}
+  .journey .lede{margin-bottom:28px}
+  .hud{bottom:24px;font-size:.58rem}
+  .hud__skip{bottom:24px}
+  .journey__vignette{background:linear-gradient(0deg,rgba(11,34,23,.78),rgba(11,34,23,.22) 55%,rgba(11,34,23,0) 80%),linear-gradient(180deg,rgba(11,34,23,.5),rgba(11,34,23,0) 26%)}
+}
+@media (max-width:600px){
+  .chapter{padding-bottom:84px}
+  .btn-row .btn{padding:14px 22px}
+}
+
+/* ---------- static route: stacked chapters with posters ---------- */
+html.static .journey,html.no-js .journey{height:auto}
+html.static .journey__stage,html.no-js .journey__stage{position:static;height:auto;overflow:visible;background:none}
+html.static .journey__canvas,html.no-js .journey__canvas,
+html.static .journey__grade,html.no-js .journey__grade,
+html.static .journey__vignette,html.no-js .journey__vignette,
+html.static .journey #snow,html.no-js .journey #snow,
+html.static .journey__frost,html.no-js .journey__frost,
+html.static .rail,html.no-js .rail,html.static .hud,html.no-js .hud,html.static .hud__skip,html.no-js .hud__skip{display:none}
+html.static .chapter,html.no-js .chapter{
+  position:relative;inset:auto;opacity:1;visibility:visible;pointer-events:auto;transform:none!important;
+  min-height:100vh;min-height:100svh;display:grid;align-content:end;overflow:hidden;
+  padding:calc(var(--nav-h) + 60px) var(--gutter) 90px;
+}
+html.static .chapter__poster,html.no-js .chapter__poster{display:block;position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover}
+html.static .chapter::before,html.no-js .chapter::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(11,34,23,.82),rgba(11,34,23,.3) 50%,rgba(11,34,23,.1)),linear-gradient(90deg,rgba(11,34,23,.5),rgba(11,34,23,0) 70%)}
+html.static .chapter__inner,html.no-js .chapter__inner{position:relative;z-index:2}
+html.static .jw>span,html.no-js .jw>span{transform:none}
+html.static .journey+.section,html.no-js .journey+.section{box-shadow:none}
+@media print{
+  .journey{height:auto!important}
+  .journey__stage{position:static!important;height:auto!important}
+  .chapter{min-height:0!important;height:auto!important;padding:120px var(--gutter) 90px!important;break-inside:avoid}
+  .chapter__poster{position:absolute!important}
+}
