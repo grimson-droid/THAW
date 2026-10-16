@@ -438,7 +438,8 @@ body[data-temp="spring"] .team-nav{background:rgba(237,243,230,.94)}
 .company{padding:clamp(88px,11vw,156px) 0}
 .company .prose p{max-width:70ch}
 .teamphoto{margin:56px 0 0}
-.teamphoto .frame{aspect-ratio:21/9}
+.teamphoto .frame{aspect-ratio:4/3;max-width:860px;margin:0 auto}
+.teamphoto .caption{max-width:860px;margin-left:auto;margin-right:auto}
 .teamphoto .mono b{font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:.04em}
 .teamphoto .mono small{font-size:.66rem}
 

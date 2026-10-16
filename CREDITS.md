@@ -11,7 +11,7 @@ Anthropic. (2026). *Claude* (Fable 5.1) [Large language model]. https://claude.a
 
 ## Photographs of the team
 
-Portraits of Christine Rideout, Austin Grimson, and Jiahua Lu are the group's own photographs, taken from `Group 87_Biographies_1DOCUMENT`. The winter photograph of Whyte Avenue on the home page is the image used on the title page of the same document (cite its original source as it was cited there).
+Portraits of Christine Rideout, Austin Grimson, Ethan Wang, and Jiahua Lu, and the black-and-white team photograph in the company section, are the group's own photographs, taken from `Group 87_Biographies_1DOCUMENT`. The winter photograph of Whyte Avenue on the home page is the image used on the title page of the same document (cite its original source as it was cited there).
 
 ## Stock photographs (Unsplash License, free to use, attribution appreciated)
 
