@@ -734,3 +734,10 @@ html{scroll-padding-top:96px}
 }
 .bio{scroll-margin-top:0}
 .frame[data-thaw].is-thawed .frame__frost{visibility:hidden;transition:opacity 2.2s var(--ease-thaw),transform 2.2s var(--ease-thaw),visibility 0s 2.3s}
+
+/* ---------- print-only live-site link (submission PDF) ---------- */
+.print-url{display:none}
+@media print{
+  .print-url{display:block;margin-top:26px;font-size:.95rem;letter-spacing:.02em;color:rgba(238,243,246,.78)}
+  .print-url a{color:var(--ember-soft);text-decoration:underline;text-underline-offset:3px}
+}
